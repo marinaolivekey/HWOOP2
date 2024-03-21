@@ -1,27 +1,28 @@
 package ru.netology.radio;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
+
+@NoArgsConstructor
+@Getter
 public class Radio {
-    private final int minStation = 0;
-    private final int minVolume = 0;
-    private final int maxVolume = 100;
+    private int minStation = 0;
+    private int minVolume = 0;
+    private int maxVolume = 100;
     private int maxStation = 9;
     private int currentStation = minStation;
     private int currentVolume = minVolume;
+
 
     // конструкторы
     public Radio(int quantityStations) {
         this.maxStation = quantityStations - 1;
     }
 
-    public Radio() {
-    }
-
-    // гетеры
-    public int getCurrentStation() {
-        return currentStation;
-    }
-
     // сеттеры
+
     public void setCurrentStation(int newCurrentStation) {
         if (newCurrentStation > getMaxStation()) {
             return;
@@ -29,19 +30,7 @@ public class Radio {
         if (newCurrentStation < getMinStation()) {
             return;
         }
-        currentStation = newCurrentStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
+        this.currentStation = newCurrentStation;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
@@ -51,15 +40,7 @@ public class Radio {
         if (newCurrentVolume < 0) {
             return;
         }
-        currentVolume = newCurrentVolume;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
+        this.currentVolume = newCurrentVolume;
     }
 
     //методы
@@ -97,4 +78,34 @@ public class Radio {
             setCurrentVolume(getCurrentVolume());
         }
     }
+        /*
+    public Radio() {
+    }
+
+
+        // гетеры
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+    */
 }

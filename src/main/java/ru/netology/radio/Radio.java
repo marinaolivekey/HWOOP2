@@ -1,25 +1,36 @@
 package ru.netology.radio;
 
-public class Radio {
-    private int currentStation;
-    private int currentVolume;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-    public int getCurrentStation() {
-        return currentStation;
+@NoArgsConstructor
+@Getter
+public class Radio {
+    private int minStation = 0;
+    private int minVolume = 0;
+    private int maxVolume = 100;
+    private int maxStation = 9;
+    private int currentStation = minStation;
+    private int currentVolume = minVolume;
+
+
+    // конструкторы
+    public Radio(int quantityStations) {
+        this.maxStation = quantityStations - 1;
     }
+
+    // сеттеры
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > getMaxStation()) {
             return;
         }
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < getMinStation()) {
             return;
         }
-        currentStation = newCurrentStation;
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
+        this.currentStation = newCurrentStation;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
@@ -29,41 +40,72 @@ public class Radio {
         if (newCurrentVolume < 0) {
             return;
         }
-        currentVolume = newCurrentVolume;
+        this.currentVolume = newCurrentVolume;
     }
 
+    //методы
     public void next() {
-        if (getCurrentStation() == 9) {
-            setCurrentStation(0);
+        if (getCurrentStation() == getMaxStation()) {
+            setCurrentStation(getMinStation());
         } else {
             setCurrentStation(getCurrentStation() + 1);
         }
     }
 
     public void prev() {
-        if (getCurrentStation() == 0) {
-            setCurrentStation(9);
+        if (getCurrentStation() == getMinStation()) {
+            setCurrentStation(getMaxStation());
         } else {
             setCurrentStation(getCurrentStation() - 1);
         }
     }
-    
+
 
     public void volumeUp() {
-        if (getCurrentVolume() < 100) {
+        if (getCurrentVolume() < getMaxVolume()) {
             setCurrentVolume(getCurrentVolume() + 1);
         }
-        if (getCurrentVolume() == 100) {
+        if (getCurrentVolume() == getMaxVolume()) {
             setCurrentVolume(getCurrentVolume());
         }
     }
 
     public void volumeDown() {
-        if (getCurrentVolume() > 0) {
+        if (getCurrentVolume() > getMinVolume()) {
             setCurrentVolume(getCurrentVolume() - 1);
         }
-        if (getCurrentVolume() == 0) {
+        if (getCurrentVolume() == getMinVolume()) {
             setCurrentVolume(getCurrentVolume());
         }
     }
+        /*
+    public Radio() {
+    }
+
+
+        // гетеры
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+    */
 }
